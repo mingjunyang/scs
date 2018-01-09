@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/alexedwards/scs/stores/cookiestore"
+	"github.com/mingjunyang/scs/stores/cookiestore"
 )
 
 // Manager is a session manager.

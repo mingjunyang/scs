@@ -775,6 +775,10 @@ func (s *Session) pop(w http.ResponseWriter, key string) (interface{}, bool, err
 	return v, true, nil
 }
 
+func (s *Session) GetToken() string {
+	return s.token
+}
+
 func generateToken() (string, error) {
 	b := make([]byte, 32)
 	_, err := rand.Read(b)

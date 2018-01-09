@@ -1,6 +1,16 @@
 # SCS: A HTTP Session Manager
 [![godoc](https://godoc.org/github.com/alexedwards/scs?status.png)](https://godoc.org/github.com/alexedwards/scs) [![go report card](https://goreportcard.com/badge/github.com/alexedwards/scs)](https://goreportcard.com/report/github.com/alexedwards/scs)
 
+***My change***
+* from my demand, I add method on `session.go`.
+
+```go
+func (s *Session) GetToken() string {
+	return s.token
+}
+```
+
+
 SCS is a fast and lightweight HTTP session manager for Go. It features:
 
 * Built-in PostgreSQL, MySQL, Redis, encrypted cookie and in-memory storage engines. Custom storage engines are also supported.
@@ -119,4 +129,3 @@ The above examples use encrypted cookies to store session data, but SCS also sup
 | [stores/pgstore](https://godoc.org/github.com/alexedwards/scs/stores/pgstore)         | PostgreSQL-based storage eninge                                                   |
 | [stores/qlstore](https://godoc.org/github.com/alexedwards/scs/stores/qlstore)         | QL-based session store                        |
 | [stores/redisstore](https://godoc.org/github.com/alexedwards/scs/stores/redisstore)   | Redis-based session store                        |
-

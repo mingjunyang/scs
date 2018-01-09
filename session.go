@@ -90,6 +90,37 @@ func load(r *http.Request, store Store, opts *options) *Session {
 	return s
 }
 
+func loadHeader(r *http.Request, store Store, opts *options) *Session {
+
+	token := r.Header.Get("session-key")
+	if token == "" {
+		return newSession(store, opts)
+	}
+
+	j, found, err := store.Find(token)
+	if err != nil {
+		return &Session{loadErr: err}
+	}
+	if found == false {
+		return newSession(store, opts)
+	}
+
+	data, deadline, err := decodeFromJSON(j)
+	if err != nil {
+		return &Session{loadErr: err}
+	}
+
+	s := &Session{
+		token:    token,
+		data:     data,
+		deadline: deadline,
+		store:    store,
+		opts:     opts,
+	}
+
+	return s
+}
+
 func (s *Session) write(w http.ResponseWriter) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()

@@ -102,6 +102,11 @@ func (m *Manager) Load(r *http.Request) *Session {
 	return load(r, m.store, m.opts)
 }
 
+// Load returns the session data for the current request.
+func (m *Manager) LoadHeader(r *http.Request) *Session {
+	return loadHeader(r, m.store, m.opts)
+}
+
 func NewCookieManager(key string) *Manager {
 	store := cookiestore.New([]byte(key))
 	return NewManager(store)

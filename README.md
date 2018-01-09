@@ -10,6 +10,26 @@ func (s *Session) GetToken() string {
 }
 ```
 
+```go
+func loadHeader(r *http.Request, store Store, opts *options) *Session {
+
+	token := r.Header.Get("session-key")
+	if token == "" {
+		return newSession(store, opts)
+	}
+    // ...
+}
+```
+
+* I add method on `manager.go`.
+
+```go
+// Load returns the session data for the current request.
+func (m *Manager) LoadHeader(r *http.Request) *Session {
+	return loadHeader(r, m.store, m.opts)
+}
+```
+
 
 SCS is a fast and lightweight HTTP session manager for Go. It features:
 
